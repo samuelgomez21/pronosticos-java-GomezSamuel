@@ -28,6 +28,14 @@ public class CalculadoraPronosticos {
         return sumar(ultimos) / ventana;
     }
 
+    public double suavizacionExponencial(List<Double> serie, double alfa) {
+        double pronostico = serie.getFirst();
+        for (int i = 1; i < serie.size(); i++) {
+            pronostico = pronostico + alfa * (serie.get(i) - pronostico);
+        }
+        return pronostico;
+    }
+
     /** Error absoluto medio (MAD): promedio de las diferencias absolutas, en unidades. */
     public double mad(List<Double> real, List<Double> pronostico) {
         validarSeries(real, pronostico);
